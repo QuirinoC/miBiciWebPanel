@@ -17,6 +17,62 @@ function initMap() {
 
 }
 
+//Date - IMPORTANT
+var year = 2018;
+var month = 3;
+var day = 15;
+var hour = 16;
+var minute = 16;
+var second = 0;
+var dateStr;
+
+//timer
+function timer(){
+    makeRequest();
+    setTimeout(getData, 200);
+    draw_travels();
+    second++;
+    setTimeout(refreshData, 1000);
+} timer();
+
+function getTimeStr() {
+    return year + "-" + month + "-" + day + "_" + hour + ":" +minute + ":" + second
+}
+
+
+//JSON DATA
+var data;
+function getData(){
+    data = JSON.parse(xhr.response);
+}
+function addLine() {
+    flightPath.setMap(map);
+}
+
+function removeLine() {
+    flightPath.setMap(null);
+}
+
+//REQUEST
+//http://127.0.0.1:5000/viajes/2018-03-06_16:16:32
+var xhr;
+function makeRequest(){
+    xhr = new XMLHttpRequest();
+    dateStr = getTimeStr();
+    xhr.open("GET", "http://127.0.0.1:5000/viajes/"+dateStr, true);
+    xhr.send();
+
+}
+
+
+//DRAWING
+//Remove lines
+function removeLines() {
+   for (var i = 0; i < viajes.length; i++) {
+      viajes[i].setMap(null);
+   }
+}
+//Draw all the travels in data
 function draw_travels() {
    removeLines();
     for (var i = 0, len = data.length; i < len; i++) {
@@ -49,60 +105,6 @@ function drawLine(viaje) {
     flightPath.setMap(map);
     viajes.push(flightPath);
 }
-
-//Remove lines
-function removeLines() {
-   for (var i = 0; i < viajes.length; i++) {
-      viajes[i].setMap(null);
-   }
-}
-
-
-//JSON data
-var data;
-function getData(){
-    data = JSON.parse(xhr.response);
-}
-function addLine() {
-    flightPath.setMap(map);
-}
-
-function removeLine() {
-    flightPath.setMap(null);
-}
-
-//Date - IMPORTANT
-var year = 2018;
-var month = 3;
-var day = 15;
-var hour = 16;
-var minute = 16;
-var second = 0;
-var dateStr;
-
-//timer
-function timer(){
-    makeRequest();
-    draw_travels();
-    second++;
-    setTimeout(refreshData, 1000);
-} timer();
-
-function getTimeStr() {
-    return year + "-" + month + "-" + day + "_" + hour + ":" +minute + ":" + second
-}
-
-
-//http://127.0.0.1:5000/viajes/2018-03-06_16:16:32
-var xhr;
-function makeRequest(){
-    xhr = new XMLHttpRequest();
-    dateStr = getTimeStr();
-    xhr.open("GET", "http://127.0.0.1:5000/viajes/"+dateStr, true);
-    xhr.send();
-    setTimeout(getData, 200);
-}
-makeRequest();
 //NOTES:
     /*
     DONE:
