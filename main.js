@@ -1,48 +1,68 @@
+var flightPathCoordinates;
 var flightPath;
 var map;
-
+var viajes = []
 function initMap() {
   //Define how a map will look
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
         center: {
-            lat: 20.674058,
-            lng: -103.350637
+            lat: 20.675,
+            lng: -103.35
         },
         mapTypeId: 'roadmap',
         disableDefaultUI: false,
         zoomControl: false,
-
     });
 
-    var flightPathCoordinates = [{
-            lat: 37.772,
-            lng: -122.214
-        },
-        {
-            lat: 21.291,
-            lng: -157.821
-        },
-        {
-            lat: -18.142,
-            lng: 178.431
-        },
-        {
-            lat: -27.467,
-            lng: 153.027
-        }
-    ];
-
-    flightPath = new google.maps.Polyline({
-        path: flightPathCoordinates,
-        strokeColor: '#FF0000',
-        strokeOpacity: 1.0,
-        strokeWeight: 1
-    });
-
-    addLine();
 }
 
+function draw_travels() {
+   removeLines();
+    for (var i = 0, len = data.length; i < len; i++) {
+        drawLine(data[i])
+    }
+}
+
+//Draw line
+function drawLine(viaje) {
+
+    route = [
+        {lat: Number(viaje.latitude_origen),
+         lng: Number(viaje.longitude_origen)},
+
+        {lat: Number(viaje.latitude_destino),
+         lng: Number(viaje.longitude_destino)}
+    ];
+    /*
+    route = [
+          {lat: 20.67966, lng: -103.362224},
+          {lat: 20.67966, lng: -103.362224}
+        ];
+    */
+    flightPath = new google.maps.Polyline({
+          path: route,
+          strokeColor: '#0',
+          strokeOpacity: 1.0,
+          strokeWeight: 1
+    });
+    flightPath.setMap(map);
+    viajes.push(flightPath);
+}
+
+//Remove lines
+function removeLines() {
+   for (var i = 0; i < viajes.length; i++) {
+      viajes[i].setMap(null);
+   }
+}
+
+
+//JSON data
+var data;
+function getData(){
+    data = JSON.parse(xhr.response);
+}
 function addLine() {
     flightPath.setMap(map);
 }
@@ -52,29 +72,37 @@ function removeLine() {
 }
 
 //Date - IMPORTANT
-var year = 2015;
-var month = 6;
-var day = 6;
+var year = 2018;
+var month = 3;
+var day = 15;
 var hour = 16;
 var minute = 16;
-var second = 32;
+var second = 0;
 var dateStr;
-//Variable to modify how fast
-//1=1 sec, meaning realtime
-var speed = 1;
+
+//timer
+function timer(){
+    makeRequest();
+    draw_travels();
+    second++;
+    setTimeout(refreshData, 1000);
+} timer();
+
 function getTimeStr() {
     return year + "-" + month + "-" + day + "_" + hour + ":" +minute + ":" + second
 }
 
-//http://127.0.0.1:5000/viajes/2015-06-06_16:16:32
+
+//http://127.0.0.1:5000/viajes/2018-03-06_16:16:32
 var xhr;
 function makeRequest(){
     xhr = new XMLHttpRequest();
     dateStr = getTimeStr();
     xhr.open("GET", "http://127.0.0.1:5000/viajes/"+dateStr, true);
-    xhr.send()
-    console.log("Hello");
+    xhr.send();
+    setTimeout(getData, 200);
 }
+makeRequest();
 //NOTES:
     /*
     DONE:
@@ -82,7 +110,7 @@ function makeRequest(){
         -Added coords to data
         -Created server
         -Added CORS to header
-        
+
     TO DO:
         1-Implement the clock
         2-Make it to work with different speeds

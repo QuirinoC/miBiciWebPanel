@@ -10,7 +10,7 @@ data = pd.read_csv('data_coords.csv',index_col='inicio', parse_dates=['inicio','
 app = Flask(__name__)
 @app.route('/')
 def index():
-    message = "Hellom World!"
+    message = "Hello World!"
     resp = Response(message)
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
@@ -38,4 +38,5 @@ def get_viajes(fecha):
     return resp
 
 if __name__ == '__main__':
+    app.jinja_env.cache = {}
     app.run(debug=True)
