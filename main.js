@@ -294,7 +294,7 @@ function timer(){
     makeRequest();
     draw_travels();
     setTimeout(timer, 1000);
-} //timer();
+}
 
 function toTimer(){
    minute++;
@@ -377,24 +377,10 @@ function drawLine(viaje) {
     flightPath.setMap(map);
     viajes.push(flightPath);
 }
-
-//NOTES:
-    /*
-    DONE:
-        -Cleaned the data
-        -Added coords to data
-        -Created server
-        -Added CORS to header
-
-    TO DO:
-        1-Implement the clock
-        2-Make it to work with different speeds
-        3-Test the responses from the server
-        4-Kill Max
-        5-Make a function to draw all the lines from the json response
-        6-Make a function to erase all the lines
-            6.1-Might need to use a queue in the one that draws so we can empty it
-            when we need to clear it
-        7-(5,6) <- Instead of we can search for a map.clear() method
-
-    */
+function main() {
+    setTimeout(function (){},2000);
+    $('#timer').text(toTimer())
+    timer();
+}
+//Run
+main();
