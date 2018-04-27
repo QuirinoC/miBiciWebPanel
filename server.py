@@ -2,8 +2,8 @@
 from flask import Flask
 from flask import Response
 import pandas as pd
-
-data = pd.read_csv('data_coords.csv',index_col='inicio', parse_dates=['inicio','fin'])
+#another csv is data_coords.csv
+data = pd.read_csv('data_colors.csv',index_col='inicio', parse_dates=['inicio','fin'])
 
 
 

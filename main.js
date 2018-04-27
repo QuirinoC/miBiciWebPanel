@@ -282,7 +282,7 @@ function initMap() {
 //Date - IMPORTANT
 var year = 2018;
 var month = 3;
-var day = 15;
+var day = 14;
 var hour = 16;
 var minute = 16;
 var second = 0;
@@ -370,7 +370,7 @@ function drawLine(viaje) {
     */
     flightPath = new google.maps.Polyline({
           path: route,
-          strokeColor: '#0',
+          strokeColor: viaje.color,
           strokeOpacity: 1.0,
           strokeWeight: 1
     });
