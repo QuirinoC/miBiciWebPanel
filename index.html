@@ -3,45 +3,164 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Estructura de datos</title>
-    <link rel="stylesheet" type="text/css" href="theme.css">
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
-        height: 100%;
-      }
+
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
       }
-      #floating-panel {
-        position: absolute;
-        bottom: 10px;
-        left: 10px;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
+
     </style>
-    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
     <div id="floating-panel">
-      <input onclick="removeLine();" type=button value="Remove line">
-      <input onclick="draw_travels();" type=button value="draw_travels">
-      <span id='timer'></span>
+
+      <p id='timer'></p>
+      <div class="select-style">
+        <select id="year" name="yyear">
+              <option value="2018">2018</option>
+              <option value="2017">2017</option>
+              <option value="2016">2016</option>
+              <option value="2015">2015</option>
+              <option value="2014">2014</option>
+        </select>
+      </div>
+      <div class="select-style">
+      <select id="month" name="mmonth">
+            <option value="12">12</option>
+            <option value="11">11</option>
+            <option value="10">10</option>
+            <option value="9">9</option>
+            <option value="8">8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+        </select>
+      </div>
+        <div class="select-style">
+        <select id="day" name="dday">
+              <option value="31">31</option>
+              <option value="30">30</option>
+              <option value="29">29</option>
+              <option value="28">28</option>
+              <option value="27">27</option>
+              <option value="26">26</option>
+              <option value="25">25</option>
+              <option value="24">24</option>
+              <option value="23">23</option>
+              <option value="22">22</option>
+              <option value="21">21</option>
+              <option value="20">20</option>
+              <option value="19">19</option>
+              <option value="18">18</option>
+              <option value="17">17</option>
+              <option value="16">16</option>
+              <option value="15">15</option>
+              <option value="14">14</option>
+              <option value="13">13</option>
+              <option value="12">12</option>
+              <option value="11">11</option>
+              <option value="10">10</option>
+              <option value="9">9</option>
+              <option value="8">8</option>
+              <option value="7">7</option>
+              <option value="6">6</option>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+          </select>
+        </div>
+          <br>
+          <div class="select-style">
+          <select id="hour" name="hhour">
+                <option value="23">23</option>
+                <option value="22">22</option>
+                <option value="21">21</option>
+                <option value="20">20</option>
+                <option value="19">19</option>
+                <option value="18">18</option>
+                <option value="17">17</option>
+                <option value="16">16</option>
+                <option value="15">15</option>
+                <option value="14">14</option>
+                <option value="13">13</option>
+                <option value="12">12</option>
+                <option value="11">11</option>
+                <option value="10">10</option>
+                <option value="9">9</option>
+                <option value="8">8</option>
+                <option value="7">7</option>
+                <option value="6">6</option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+            </select>
+          </div>
+          <div class="select-style">
+            <select id="min" name="mmin">
+                  <option value="50">50</option>
+                  <option value="40">40</option>
+                  <option value="30">30</option>
+                  <option value="20">20</option>
+                  <option value="10">10</option>
+              </select>
+            </div>
+            <div class="select-style">
+              <select id="sec" name="ssec">
+                    <option value="50">50</option>
+                    <option value="40">40</option>
+                    <option value="30">30</option>
+                    <option value="20">20</option>
+                    <option value="10">10</option>
+                </select>
+              </div>
+                <br>
+                <div class="select-style">
+                <select id="formato" name="fformato">
+                      <option value="S">Sec</option>
+                      <option value="M">Min</option>
+                      <option value="H">Hr</option>
+                      <option value="D">Day</option>
+                  </select>
+                </div>
+                <div class="select-style">
+                  <select id="mul" name="mmul">
+                    <option value="10">10</option>
+                    <option value="9">9</option>
+                    <option value="8">8</option>
+                    <option value="7">7</option>
+                    <option value="6">6</option>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                    </select>
+                  </div>
+                  <br>
+              <input id="b1" onclick="setTime();" type="button" value="Submit">
+
+              <input id="b1" onclick="stop();" type="button" value="►/II">
+
     </div>
     <div id="map"></div>
-    <script   src="http://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
     <script src="main.js"></script>
+    <script src="select.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCr2e4KrHpXhd0VhecOaweRksFr8IpaLQ&callback=initMap">
     </script>

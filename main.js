@@ -4,6 +4,7 @@ var map;
 var viajes = [];
 var days_month = [31,28,31,30,31,30,31,31,30,31,30,31];
 var data = [];
+var mul = 1;
 function initMap() {
   //Define how a map will look
     map = new google.maps.Map(document.getElementById('map'), {
@@ -294,10 +295,10 @@ function timer(){
     makeRequest();
     draw_travels();
     setTimeout(timer, 1000);
-}
+} timer();
 
 function toTimer(){
-   minute++;
+   minute = minute + (1*mul);
 
    if (second == 60) {minute++; second = 0;}
    if (minute == 60) {hour++; minute = 0;}
@@ -305,11 +306,22 @@ function toTimer(){
    if (hour == 24) {day++; hour = 6;}
    if (day == days_month[month-1]) {month++; day = 1;}
    if (month == 13) {year++; month=1;}
-   return year + "-" + month + "-" + day + " " + hour + ":" +minute + ":" + second
+   return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second
 }
 
 function getTimeStr() {
-    return year + "-" + month + "-" + day + "_" + hour + ":" +minute + ":" + second;
+    return year + "-" + month + "-" + day + "_" + hour + ":" + minute + ":" + second;
+}
+function setTime(){
+  year = $('#year').val();
+  month = $('#month').val();
+  day = $('#day').val();
+  hour = $('#hour').val();
+  minute = $('#min').val();
+  second = $('#sec').val();
+}
+function stop(){
+  clearTime(timer());
 }
 
 
@@ -383,4 +395,4 @@ function main() {
     timer();
 }
 //Run
-main();
+//main();
