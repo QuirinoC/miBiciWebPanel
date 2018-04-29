@@ -3,7 +3,8 @@ from flask import Flask
 from flask import Response
 import pandas as pd
 #another csv is data_coords.csv
-data = pd.read_csv('data_colors.csv',index_col='inicio', parse_dates=['inicio','fin'])
+#                data_colors.csv
+data = pd.read_csv('data_colors_final.csv',index_col='inicio', parse_dates=['inicio','fin'])
 
 
 

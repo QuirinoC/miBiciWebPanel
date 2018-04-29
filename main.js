@@ -10,8 +10,8 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
         center: {
-            lat: 20.675,
-            lng: -103.35
+            lat: 20.678332198825547,
+            lng: -103.35876398778993
         },
         mapTypeId: 'roadmap',
         disableDefaultUI: false,
@@ -283,19 +283,24 @@ function initMap() {
 //Date - IMPORTANT
 var year = 2018;
 var month = 3;
-var day = 14;
-var hour = 16;
-var minute = 16;
+var day = 15;
+var hour = 6;
+var minute = 0;
 var second = 0;
 var dateStr;
 
-//timer
+
+//timer() will make a call every x milliseconds to be drawn
 function timer(){
     $('#timer').text(toTimer())
     makeRequest();
     draw_travels();
-    setTimeout(timer, 1000);
-} timer();
+    setTimeout(timer, 250);
+}timer();
+
+
+
+
 
 function toTimer(){
    minute = minute + (1*mul);
@@ -338,6 +343,7 @@ function removeLine() {
 }
 
 //REQUEST
+//Example request
 //http://127.0.0.1:5000/viajes/2018-03-06_16:16:32
 var xhr;
 function makeRequest(){
@@ -345,7 +351,7 @@ function makeRequest(){
     dateStr = getTimeStr();
     xhr.open("GET", "http://127.0.0.1:5000/viajes/"+dateStr, true);
     xhr.send();
-    setTimeout(getData, 200);
+    setTimeout(getData, 250);
 }
 
 //DRAWING
@@ -383,8 +389,8 @@ function drawLine(viaje) {
     flightPath = new google.maps.Polyline({
           path: route,
           strokeColor: viaje.color,
-          strokeOpacity: 1.0,
-          strokeWeight: 1
+          strokeOpacity: 1,
+          strokeWeight: 0.8
     });
     flightPath.setMap(map);
     viajes.push(flightPath);
