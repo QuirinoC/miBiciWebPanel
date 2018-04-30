@@ -4,7 +4,9 @@ var map;
 var viajes = [];
 var days_month = [31,28,31,30,31,30,31,31,30,31,30,31];
 var data = [];
-var mul = 1;
+var speed = 1;
+var unit = $("#formato")
+var multiplier = $("#mul")
 function initMap() {
   //Define how a map will look
     map = new google.maps.Map(document.getElementById('map'), {
@@ -292,38 +294,88 @@ var dateStr;
 
 //timer() will make a call every x milliseconds to be drawn
 function timer(){
-    $('#timer').text(toTimer())
+    $('#timer').text(add_to_timer())
     makeRequest();
     draw_travels();
     setTimeout(timer, 250);
-}timer();
+} timer();
 
-
-
-
-
-function toTimer(){
-   minute = minute + (1*mul);
-
+function add_to_timer(){
+    var fMultiplier = Math.floor(Number(multiplier.val())/4)
+    switch (unit.val()) {
+        case "S":
+            time_to_add = 1 * fMultiplier;
+            break;
+        case "M":
+            time_to_add = 60 * fMultiplier;
+            break;
+        case "H":
+            time_to_add = 3600 * fMultiplier;
+            break;
+        case "D":
+            time_to_add = 86400 * fMultiplier;
+            break;
+    }
+    /*
+    console.log("-------")
+    console.log(time_to_add)
+    console.log(fMultiplier)
+    console.log("-------")
+    */
+    if (time_to_add >= 86400){
+        day += Math.floor(time_to_add/86400); time_to_add -= time_to_add;
+    }
+    if (time_to_add >= 3600){
+        hour += Math.floor(time_to_add/3600); time_to_add -= time_to_add;
+    }
+    if (time_to_add >= 60){
+        minute += Math.floor(time_to_add/60); time_to_add -= time_to_add;
+    }
+    if (time_to_add >= 1){
+        second += time_to_add;
+    }
+    if (second >= 60) {minute++; second -= 60;}
+    if (minute >= 60) {hour++; minute -= 60;}
+    if (hour >= 24) {day++; hour -= 19;}
+    if (day >= days_month[month-1]) {month++; day = 1;}
+    if (month == 13) {year++; month=1;}
+   /*
    if (second == 60) {minute++; second = 0;}
    if (minute == 60) {hour++; minute = 0;}
    //We need to start on 6 am
    if (hour == 24) {day++; hour = 6;}
    if (day == days_month[month-1]) {month++; day = 1;}
    if (month == 13) {year++; month=1;}
-   return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second
+   */
+   return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+}
+
+function getIncrement() {
+    var time_to_add;
+    switch (unit.val()) {
+        case "S":
+            time_to_add = 1;
+        case "M":
+            time_to_add = 60;
+        case "H":
+            time_to_add = 3600;
+        case "D":
+            time_to_add = 86400;
+    }
+    return time_to_add;
 }
 
 function getTimeStr() {
     return year + "-" + month + "-" + day + "_" + hour + ":" + minute + ":" + second;
 }
 function setTime(){
-  year = $('#year').val();
-  month = $('#month').val();
-  day = $('#day').val();
-  hour = $('#hour').val();
-  minute = $('#min').val();
-  second = $('#sec').val();
+  year = Number($('#year').val());
+  month = Number($('#month').val());
+  day = Number($('#day').val());
+  hour = Number($('#hour').val());
+  minute = Number($('#min').val());
+  second = Number($('#sec').val());
+  $('#timer').text(add_to_timer())
 }
 function stop(){
   clearTime(timer());
@@ -350,6 +402,7 @@ function makeRequest(){
     xhr = new XMLHttpRequest();
     dateStr = getTimeStr();
     xhr.open("GET", "http://127.0.0.1:5000/viajes/"+dateStr, true);
+    //console.log("http://127.0.0.1:5000/viajes/"+dateStr);
     xhr.send();
     setTimeout(getData, 250);
 }

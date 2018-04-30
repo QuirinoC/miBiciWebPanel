@@ -22,17 +22,14 @@
     <div id="floating-panel">
 
       <p id='timer'></p>
-
-        <select id="year" name="yyear">
-              <option value="2018">2018</option>
-              <option value="2017">2017</option>
-              <option value="2016">2016</option>
-              <option value="2015">2015</option>
-              <option value="2014">2014</option>
+      <select id="year" name="year">
+            <option value="2018">2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
         </select>
-
-
-      <select id="month" name="mmonth">
+      <select id="month" name="month">
             <option value="12">12</option>
             <option value="11">11</option>
             <option value="10">10</option>
@@ -46,8 +43,7 @@
             <option value="2">2</option>
             <option value="1">1</option>
         </select>
-
-        <select id="day" name="dday">
+        <select id="day" name="day">
               <option value="31">31</option>
               <option value="30">30</option>
               <option value="29">29</option>
@@ -81,8 +77,7 @@
               <option value="1">1</option>
           </select>
           <br>
-
-          <select id="hour" name="hhour">
+          <select id="hour" name="hour">
                 <option value="23">23</option>
                 <option value="22">22</option>
                 <option value="21">21</option>
@@ -101,53 +96,43 @@
                 <option value="8">8</option>
                 <option value="7">7</option>
                 <option value="6">6</option>
-                <option value="5">5</option>
-                <option value="4">4</option>
-                <option value="3">3</option>
-                <option value="2">2</option>
-                <option value="1">1</option>
             </select>
-
-            <select id="min" name="mmin">
+            <select id="min" name="min">
                   <option value="50">50</option>
                   <option value="40">40</option>
                   <option value="30">30</option>
                   <option value="20">20</option>
                   <option value="10">10</option>
+                  <option value="0">0</option>
               </select>
-
-
-              <select id="sec" name="ssec">
+              <select id="sec" name="sec">
                     <option value="50">50</option>
                     <option value="40">40</option>
                     <option value="30">30</option>
                     <option value="20">20</option>
                     <option value="10">10</option>
+                    <option value="0">0</option>
                 </select>
-
                 <br>
-
                 <select id="formato" name="fformato">
                       <option value="S">Sec</option>
                       <option value="M">Min</option>
                       <option value="H">Hr</option>
                       <option value="D">Day</option>
                   </select>
-
-
-                  <select id="mul" name="mmul">
-                    <option value="10">10</option>
-                    <option value="9">9</option>
-                    <option value="8">8</option>
-                    <option value="7">7</option>
-                    <option value="6">6</option>
-                    <option value="5">5</option>
+                  <select id="mul" name="mul">
                     <option value="4">4</option>
-                    <option value="3">3</option>
-                    <option value="2">2</option>
-                    <option value="1">1</option>
+                    <option value="8">8</option>
+                    <option value="12">12</option>
+                    <option value="16">16</option>
+                    <option value="20">20</option>
+                    <option value="24">24</option>
+                    <option value="28">28</option>
+                  <option value="32">32</option>
+                    <option value="34">34</option>
+                    <option value="36">36</option>
+                    <option value="40">40</option>
                     </select>
-                  
                   <br>
               <input id="b1" onclick="setTime();" type="button" value="Submit">
 
@@ -155,9 +140,8 @@
 
     </div>
     <div id="map"></div>
-    <script src="http://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+    <script   src="http://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
     <script src="main.js"></script>
-    <script src="select.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCr2e4KrHpXhd0VhecOaweRksFr8IpaLQ&callback=initMap">
     </script>
