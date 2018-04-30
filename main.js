@@ -284,17 +284,18 @@ function initMap() {
 
 //Date - IMPORTANT
 var year = 2018;
-var month = 3;
+var month = 1;
 var day = 15;
-var hour = 6;
+var hour = 8;
 var minute = 0;
 var second = 0;
 var dateStr;
 
 
 //timer() will make a call every x milliseconds to be drawn
+var drawCounter = 1;
 function timer(){
-    $('#timer').text(add_to_timer())
+    $('#timer').text(add_to_timer());
     makeRequest();
     draw_travels();
     setTimeout(timer, 250);
@@ -414,6 +415,7 @@ function removeLines() {
    for (var i = 0; i < viajes.length; i++) {
       viajes[i].setMap(null);
    }
+   //viajes = [];
 }
 //Draw all the travels in data
 function draw_travels() {
